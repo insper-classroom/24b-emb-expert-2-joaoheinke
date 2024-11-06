@@ -31,3 +31,8 @@ endif()
 
 # Codes subdir:
 add_subdirectory(main)
+add_subdirectory(st7735)
+add_subdirectory(ili9341)
+add_subdirectory(st7789)
+add_subdirectory(gfx)
+add_subdirectory(freertos)

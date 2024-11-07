@@ -63,7 +63,7 @@
 
 #define READ_BIT 0x80
 
-int32_t t_fine;
+
 
 uint16_t dig_T1;
 int16_t dig_T2, dig_T3;
@@ -80,6 +80,7 @@ read from the chip at startup and used in these routines.
 */
 int32_t compensate_temp(int32_t adc_T) {
     int32_t var1, var2, T;
+    int32_t t_fine;
     var1 = ((((adc_T >> 3) - ((int32_t) dig_T1 << 1))) * ((int32_t) dig_T2)) >> 11;
     var2 = (((((adc_T >> 4) - ((int32_t) dig_T1)) * ((adc_T >> 4) - ((int32_t) dig_T1))) >> 12) * ((int32_t) dig_T3))
             >> 14;
@@ -92,6 +93,7 @@ int32_t compensate_temp(int32_t adc_T) {
 uint32_t compensate_pressure(int32_t adc_P) {
     int32_t var1, var2;
     uint32_t p;
+    int32_t t_fine;
     var1 = (((int32_t) t_fine) >> 1) - (int32_t) 64000;
     var2 = (((var1 >> 2) * (var1 >> 2)) >> 11) * ((int32_t) dig_P6);
     var2 = var2 + ((var1 * ((int32_t) dig_P5)) << 1);
@@ -116,6 +118,7 @@ uint32_t compensate_pressure(int32_t adc_P) {
 
 uint32_t compensate_humidity(int32_t adc_H) {
     int32_t v_x1_u32r;
+    int32_t t_fine;
     v_x1_u32r = (t_fine - ((int32_t) 76800));
     v_x1_u32r = (((((adc_H << 14) - (((int32_t) dig_H4) << 20) - (((int32_t) dig_H5) * v_x1_u32r)) +
                    ((int32_t) 16384)) >> 15) * (((((((v_x1_u32r * ((int32_t) dig_H6)) >> 10) * (((v_x1_u32r *

@@ -151,7 +151,7 @@ int main() {
     LCD_initDisplay();
     LCD_setRotation(1);
 
-    while (1) {
+        while (1) {
         uint8_t buffer[8];
         read_registers(0xF7, buffer, 8);
 
@@ -159,9 +159,9 @@ int main() {
         int32_t adc_T = buffer[3] << 12 | buffer[4] << 4 | buffer[5] >> 4;
         int32_t adc_H = buffer[6] << 8 | buffer[7];
 
-        temperature = compensate_temp(adc_T, &calib);
-        pressure = compensate_pressure(adc_P, &calib);
-        humidity = compensate_humidity(adc_H, &calib);
+        int32_t temperature = compensate_temp(adc_T, &calib);
+        int32_t pressure = compensate_pressure(adc_P, &calib);
+        int32_t humidity = compensate_humidity(adc_H, &calib);
 
         LCD_clearScreen();
         char bufferDisplay[20];
@@ -176,4 +176,5 @@ int main() {
 
         sleep_ms(2000);
     }
+
 }

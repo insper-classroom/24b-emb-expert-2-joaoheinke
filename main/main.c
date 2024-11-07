@@ -1,3 +1,66 @@
+/**
+ * Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+// #include <stdio.h>
+// #include "pico/stdlib.h"
+// #include "hardware/gpio.h"
+
+// int main() {
+//     stdio_init_all();
+//     while (true) {
+//         printf("Hello, world!\n");
+//         sleep_ms(1000);
+//     }
+// }
+
+
+#include "pico/stdlib.h"
+
+#include "ili9341.h"
+#include "gfx.h"
+
+/**
+ * Copyright (c) 2020 Raspberry Pi (Trading) Ltd.
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+#include <stdio.h>
+#include <string.h>
+#include "pico/stdlib.h"
+#include "pico/binary_info.h"
+#include "hardware/spi.h"
+
+/* Example code to talk to a bme280 humidity/temperature/pressure sensor.
+
+   NOTE: Ensure the device is capable of being driven at 3.3v NOT 5v. The Pico
+   GPIO (and therefore SPI) cannot be used at 5v.
+
+   You will need to use a level shifter on the SPI lines if you want to run the
+   board at 5v.
+
+   Connections on Raspberry Pi Pico board and a generic bme280 board, other
+   boards may vary.
+
+   GPIO 16 (pin 21) MISO/spi0_rx-> SDO/SDO on bme280 board
+   GPIO 17 (pin 22) Chip select -> CSB/!CS on bme280 board
+   GPIO 18 (pin 24) SCK/spi0_sclk -> SCL/SCK on bme280 board
+   GPIO 19 (pin 25) MOSI/spi0_tx -> SDA/SDI on bme280 board
+   3.3v (pin 36) -> VCC on bme280 board
+   GND (pin 38)  -> GND on bme280 board
+
+   Note: SPI devices can have a number of different naming schemes for pins. See
+   the Wikipedia page at https://en.wikipedia.org/wiki/Serial_Peripheral_Interface
+   for variations.
+
+   This code uses a bunch of register definitions, and some compensation code derived
+   from the Bosch datasheet which can be found here.
+   https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme280-ds002.pdf
+*/
+
 #include "pico/stdlib.h"
 #include "ili9341.h"
 #include "gfx.h"
